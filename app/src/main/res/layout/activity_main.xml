@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:id="@+id/mainLayout"
+    >
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/contact_list_main">
+        </androidx.recyclerview.widget.RecyclerView>
+
+<!--    <EditText-->
+<!--        android:id="@+id/first_name_et"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:hint="First Name"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:textSize="12dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/scrollView1" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/last_name_et"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:hint="Last Name"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:textSize="12dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/first_name_et" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/address_et"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:hint="Address"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:textSize="12dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/last_name_et" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/city_et"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:hint="City"-->
+<!--        android:inputType="textPersonName"-->
+<!--        android:textSize="12dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/address_et" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/age_et"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:ems="10"-->
+<!--        android:hint="Age"-->
+<!--        android:inputType="number"-->
+<!--        android:textSize="12dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/city_et" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/save_btn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Save"-->
+<!--        android:textSize="12dp"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/asNewCheckBox"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/asNewCheckBox" />-->
+
+<!--    <CheckBox-->
+<!--        android:id="@+id/asNewCheckBox"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="As New Contact"-->
+<!--        android:textSize="8dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/textView" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="UID = "-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/age_et" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/UID"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/textView"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/textView"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/textView" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/delete_btn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Delete"-->
+<!--        android:textSize="12dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/save_btn" />-->
+</LinearLayout>
