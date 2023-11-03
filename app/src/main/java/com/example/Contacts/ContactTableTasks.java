@@ -1,5 +1,6 @@
 package com.example.Contacts;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 import java.util.ArrayList;
@@ -54,17 +55,19 @@ public class ContactTableTasks {
     }
     public static class SelectAllContactsTask extends AsyncTask<Void, Void, List<Contacts>> {
         //private RecyclerView tableLayout;
-        lambda_one_param<ArrayList<Contacts>> customPostExecuteCode;
+        private lambda_one_param<ArrayList<Contacts>, Void> customPostExecuteCode;
+        private lambda_one_param<ContactsDAO, List<Contacts>> customDoInBackGround;
         private ContactsDAO dao;
 
-        public SelectAllContactsTask(ContactsDAO dao, lambda_one_param<ArrayList<Contacts>> customPostExecuteCode){
+        public SelectAllContactsTask(ContactsDAO dao, lambda_one_param<ContactsDAO, List<Contacts>> customDoInBackGround, lambda_one_param<ArrayList<Contacts>, Void> customPostExecuteCode){
+            this.customDoInBackGround = customDoInBackGround;
             this.dao = dao;
             this.customPostExecuteCode = customPostExecuteCode;
         }
 
         @Override
         protected List<Contacts> doInBackground(Void ... voids) {
-            return dao.getAll();
+            return customDoInBackGround.execute(dao);
         }
         @Override
         protected void onPostExecute(List<Contacts> result) {

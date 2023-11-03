@@ -20,6 +20,10 @@ public interface ContactsDAO {
             "last_name LIKE :last LIMIT 1")
     Contacts findByName(String first, String last);
 
+    @Query("SELECT * FROM contacts WHERE uid LIKE :uid " +
+            "LIMIT 1")
+    Contacts findByUID(int uid);
+
     @Insert
     void insertAll(Contacts... contacts);
 

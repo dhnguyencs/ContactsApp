@@ -1,5 +1,6 @@
 package com.example.Contacts;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,8 @@ import kotlin.jvm.internal.Lambda;
 
 public class contactListAdaptor extends RecyclerView.Adapter<contactListAdaptor.myviewholder> {
     ArrayList<Contacts> contacts;
-    TextView contactName;
-    lambda_two_param<Contacts, View> customViewCode;
-    public contactListAdaptor(ArrayList<Contacts> contacts, lambda_two_param<Contacts, View> customViewCode){
+    lambda_two_param<Contacts, View, Void> customViewCode;
+    public contactListAdaptor(ArrayList<Contacts> contacts, lambda_two_param<Contacts, View, Void> customViewCode){
         this.customViewCode = customViewCode;
         this.contacts = contacts;
     }
