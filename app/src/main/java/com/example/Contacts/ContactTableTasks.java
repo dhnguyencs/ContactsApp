@@ -1,11 +1,14 @@
 package com.example.Contacts;
 
 import android.content.Context;
+import android.icu.text.SimpleDateFormat;
 import android.os.AsyncTask;
 
+import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ContactTableTasks {
     public static class DeleteTask extends AsyncTask<Contacts, Void, Void> {
@@ -35,44 +38,39 @@ public class ContactTableTasks {
         }
     }
     public static class InsertTask extends AsyncTask<Contacts, Void, ArrayList<Contacts>> {
-        private ContactsDAO dao;
-        private int startingUID;
-        public InsertTask(ContactsDAO dao, int startingUID){
+        ContactsDAO dao;
+        public InsertTask(ContactsDAO dao){
             this.dao = dao;
-            this.startingUID = startingUID;
         }
 
         @Override
         protected ArrayList<Contacts> doInBackground(Contacts ... contacts) {
-            ArrayList<Contacts> contactsArrayList = new ArrayList<Contacts>();
             int i = 0;
             for(Contacts contact : contacts){
-                contact.uid = contact.uid + i++;
+                contact.uid = String_ext.bytesToHex((new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date())).getBytes());
             }
             dao.insertAll(contacts);
             return null;
         }
     }
-    public static class SelectAllContactsTask extends AsyncTask<Void, Void, List<Contacts>> {
+    public static class SelectAllContactsTask extends AsyncTask<Void, Void, ArrayList<Contacts>> {
         //private RecyclerView tableLayout;
         private lambda_one_param<ArrayList<Contacts>, Void> customPostExecuteCode;
-        private lambda_one_param<ContactsDAO, List<Contacts>> customDoInBackGround;
-        private ContactsDAO dao;
+        private lambda_no_params<ArrayList<Contacts>> customDoInBackGround;
 
-        public SelectAllContactsTask(ContactsDAO dao, lambda_one_param<ContactsDAO, List<Contacts>> customDoInBackGround, lambda_one_param<ArrayList<Contacts>, Void> customPostExecuteCode){
+        public SelectAllContactsTask(lambda_no_params<ArrayList<Contacts>> customDoInBackGround, lambda_one_param<ArrayList<Contacts>, Void> customPostExecuteCode){
             this.customDoInBackGround = customDoInBackGround;
-            this.dao = dao;
             this.customPostExecuteCode = customPostExecuteCode;
         }
 
         @Override
-        protected List<Contacts> doInBackground(Void ... voids) {
-            return customDoInBackGround.execute(dao);
+        protected ArrayList<Contacts> doInBackground(Void ... voids) {
+            return customDoInBackGround.execute();
         }
         @Override
-        protected void onPostExecute(List<Contacts> result) {
+        protected void onPostExecute(ArrayList<Contacts> result) {
             if (result == null) return;
-            customPostExecuteCode.execute(new ArrayList<Contacts>(result));
+            customPostExecuteCode.execute(result);
         }
     }
 

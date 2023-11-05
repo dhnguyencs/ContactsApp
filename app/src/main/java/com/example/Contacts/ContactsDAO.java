@@ -1,20 +1,30 @@
 package com.example.Contacts;
 
+import android.content.Context;
+
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 import androidx.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
 public interface ContactsDAO {
+    public static ContactsDAO getDao(Context context){
+        AppDatabase db = Room.databaseBuilder(context,
+                AppDatabase.class, "sample_database_2").build();
+        return db.contactsDAO();
+    }
     @Query("SELECT * FROM contacts")
     List<Contacts> getAll();
 
     @Query("SELECT * FROM contacts WHERE uid IN (:userIds)")
-    List<Contacts> loadAllByIds(int[] userIds);
+    List<Contacts> loadAllByIds(String[] userIds);
 
     @Query("SELECT * FROM contacts WHERE first_name LIKE :first AND " +
             "last_name LIKE :last LIMIT 1")
@@ -22,7 +32,7 @@ public interface ContactsDAO {
 
     @Query("SELECT * FROM contacts WHERE uid LIKE :uid " +
             "LIMIT 1")
-    Contacts findByUID(int uid);
+    Contacts findByUID(String uid);
 
     @Insert
     void insertAll(Contacts... contacts);

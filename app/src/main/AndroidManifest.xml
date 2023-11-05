@@ -9,7 +9,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.RoomStorageApp"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SingleContactView" />
+        <activity android:name=".AddContact"/>
     </application>
 
 </manifest>
