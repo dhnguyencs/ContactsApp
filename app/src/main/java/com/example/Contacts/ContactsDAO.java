@@ -15,9 +15,9 @@ import java.util.List;
 
 @Dao
 public interface ContactsDAO {
-    public static ContactsDAO getDao(Context context){
+    static ContactsDAO getDao(Context context){
         AppDatabase db = Room.databaseBuilder(context,
-                AppDatabase.class, "sample_database_2").build();
+                AppDatabase.class, "contactsTable").build();
         return db.contactsDAO();
     }
     @Query("SELECT * FROM contacts")

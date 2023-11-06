@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         addBtn = (ImageButton) findViewById(R.id.addContactButton);
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         lambda_two_param<Contacts, View, Void> customAdaptorCode = (Contacts contact, View itemView)->{
             TextView textView = (TextView) itemView.findViewById(R.id.ContactNameSingle);
-
             textView.setText(String.format("%s %s", contact.firstName, contact.lastName));
 
             textView.setOnClickListener((view) -> {
