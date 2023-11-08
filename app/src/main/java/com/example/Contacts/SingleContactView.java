@@ -31,7 +31,7 @@ public class SingleContactView extends AppCompatActivity {
             ((TextView) findViewById(R.id.Address)) .setText(contacts.get(0).address);
             ((TextView) findViewById(R.id.City))    .setText(contacts.get(0).city);
             ((TextView) findViewById(R.id.Age))     .setText((new SimpleDateFormat("MM-dd-yyyy").format(new Date(contacts.get(0).age))));
-            ((TextView) findViewById(R.id.PhoneNumber)).setText(contacts.get(0).phone_number);
+            ((TextView) findViewById(R.id.PhoneNumber)).setText(contacts.get(0).get_phone_formatted());
            return null;
         });
         selectAllContactsTask.execute();

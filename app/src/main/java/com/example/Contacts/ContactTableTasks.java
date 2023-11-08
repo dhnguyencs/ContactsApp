@@ -62,7 +62,6 @@ public class ContactTableTasks {
             this.customDoInBackGround = customDoInBackGround;
             this.customPostExecuteCode = customPostExecuteCode;
         }
-
         @Override
         protected ArrayList<Contacts> doInBackground(Void ... voids) {
             return customDoInBackGround.execute();

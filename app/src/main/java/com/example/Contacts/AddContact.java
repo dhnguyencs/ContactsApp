@@ -31,6 +31,7 @@ public class AddContact extends AppCompatActivity {
         city = findViewById(R.id.city_input);
         age = findViewById(R.id.age_input);
         phone = findViewById(R.id.phone_input);
+        back_btn.setText( getIntent().getExtras().getBoolean("isEditMode") ? "Discard" : "Cancel" );
         if(getIntent().getExtras().getBoolean("isEditMode")){
             save_add_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -46,6 +47,7 @@ public class AddContact extends AppCompatActivity {
             });
             ((TextView) findViewById(R.id.title)).setText("Edit contact");
             setTextFields();
+
         }else{
             save_add_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
