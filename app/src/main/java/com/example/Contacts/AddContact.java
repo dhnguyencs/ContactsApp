@@ -18,6 +18,21 @@ public class AddContact extends AppCompatActivity {
     private Button save_add_btn, back_btn;
     private TextInputEditText firstName, lastName, address, city;
     private EditText age, phone;
+    Contacts contact = null;
+    public Contacts getInputs(){
+        String firstName_s, lastName_s, address_s, city_s;
+        long age_int;
+        firstName_s = firstName.getText().toString().trim();
+        lastName_s = lastName.getText().toString().trim();
+        address_s = address.getText().toString().trim();
+        city_s = city.getText().toString().trim();
+        if(firstName_s.isEmpty() || lastName_s.isEmpty()) return null;
+        Date newDate = new Date(age.getText().toString());
+        if(newDate == null) newDate = new Date();
+        age_int = newDate.getTime();
+        String phone_number = phone.getText().toString();
+        return new Contacts(firstName_s, lastName_s, address_s, city_s, age_int, phone_number);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +48,22 @@ public class AddContact extends AppCompatActivity {
         phone = findViewById(R.id.phone_input);
         back_btn.setText( getIntent().getExtras().getBoolean("isEditMode") ? "Discard" : "Cancel" );
         if(getIntent().getExtras().getBoolean("isEditMode")){
+            ((Button) findViewById(R.id.delete_btn)).setVisibility(View.VISIBLE);
+            ((Button) findViewById(R.id.delete_btn)).setText("Delete");
+            ((Button) findViewById(R.id.delete_btn)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ContactTableTasks.DeleteTask newDeleteTask = new ContactTableTasks.DeleteTask(ContactsDAO.getDao(getApplicationContext()));
+                    newDeleteTask.execute(contact);
+                    Intent newIntent = new Intent(AddContact.this, MainActivity.class);
+                    startActivity(newIntent);
+                }
+            });
             save_add_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Contacts newContact = getInputs();
+                    if(newContact == null) return;
                     newContact.uid = getIntent().getExtras().getString("UID");
                     ContactTableTasks.UpdateTask updateTask = new ContactTableTasks.UpdateTask(ContactsDAO.getDao(getApplicationContext()));
                     updateTask.execute(newContact);
@@ -76,31 +103,18 @@ public class AddContact extends AppCompatActivity {
             }
         });
     }
-    private Contacts getInputs(){
-        String firstName_s, lastName_s, address_s, city_s;
-        long age_int;
-        firstName_s = firstName.getText().toString().trim();
-        lastName_s = lastName.getText().toString().trim();
-        address_s = address.getText().toString().trim();
-        city_s = city.getText().toString().trim();
-        if(firstName_s.isEmpty() || lastName_s.isEmpty()) return null;
-        Date newDate = new Date(age.getImeOptions());
-        age_int = newDate.getTime();
-        String phone_number = phone.getText().toString();
-        return new Contacts(firstName_s, lastName_s, address_s, city_s, age_int, phone_number);
-    }
     private void setTextFields(){
         ContactTableTasks.SelectAllContactsTask selectAllContactsTask = new ContactTableTasks.SelectAllContactsTask(()->{
             ArrayList<Contacts> contacts = new ArrayList<Contacts>();
             contacts.add(ContactsDAO.getDao(getApplicationContext()).findByUID(getIntent().getExtras().getString("UID")));
             return contacts;
         }, (ArrayList<Contacts> contacts)->{
-            Contacts contact = contacts.get(0);
+            contact = contacts.get(0);
             firstName.setText(contact.firstName);
             lastName.setText(contact.lastName);
             address.setText(contact.address);
             city.setText(contact.city);
-            age.setText(contact.getAge_str());
+            age.setText(contact.getBirthDate());
             phone.setText(contact.phone_number);
             return null;
         });

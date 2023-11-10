@@ -1,18 +1,19 @@
 package com.example.Contacts;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.view.Gravity;
-import android.widget.TableRow;
-import android.widget.TextView;
+import static java.util.Calendar.DATE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
+
+import android.icu.text.SimpleDateFormat;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 @Entity
 public class Contacts {
@@ -61,6 +62,7 @@ public class Contacts {
     public String phone_number;
 
     public String get_phone_formatted(){
+        if(phone_number.length() != 10 && phone_number.length() != 11) return phone_number;
         String country_code, area_code, block_1, block_2;
         country_code = area_code = block_1 = block_2 = "";
         char[] phone_num = phone_number.toCharArray();
@@ -82,8 +84,23 @@ public class Contacts {
                 + Character.toString(phone_num[10 + offset]);
         return country_code + "(" + area_code + ")" + " " + block_1 + "-" + block_2;
     }
+    public String getBirthDate(){
+        return new SimpleDateFormat("MM/dd/yyyy").format(new Date(age));
+    }
     public String getAge_str(){
-        return (new StringBuilder().append(age)).toString();
+        Calendar a = getCalendar(new Date(age));
+        Calendar b = getCalendar(new Date());
+        int diff = b.get(YEAR) - a.get(YEAR);
+        if (a.get(MONTH) > b.get(MONTH) ||
+                (a.get(MONTH) == b.get(MONTH) && a.get(DATE) > b.get(DATE))) {
+            diff--;
+        }
+        return Integer.toString(diff);
+    }
+    private Calendar getCalendar(Date date) {
+        Calendar cal = Calendar.getInstance(Locale.US);
+        cal.setTime(date);
+        return cal;
     }
 
     @NonNull

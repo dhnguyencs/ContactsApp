@@ -8,6 +8,7 @@ import java.security.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ContactTableTasks {
@@ -37,19 +38,29 @@ public class ContactTableTasks {
             return null;
         }
     }
-    public static class InsertTask extends AsyncTask<Contacts, Void, ArrayList<Contacts>> {
+//    public static class InsertListTask extends AsyncTask<ArrayList<Contacts>, Void, ArrayList<Contacts>> {
+//        ContactsDAO dao;
+//        public InsertListTask(ContactsDAO dao) { this.dao = dao; }
+//
+//        @Override
+//        protected ArrayList<Contacts> doInBackground(ArrayList<Contacts>... arrayLists) {
+//            return null;
+//        }
+//    }
+    public static class InsertTask extends AsyncTask<Contacts, Void, Void> {
         ContactsDAO dao;
         public InsertTask(ContactsDAO dao){
             this.dao = dao;
         }
 
         @Override
-        protected ArrayList<Contacts> doInBackground(Contacts ... contacts) {
-            int i = 0;
-            for(Contacts contact : contacts){
-                contact.uid = String_ext.bytesToHex((new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date())).getBytes());
-            }
-            dao.insertAll(contacts);
+        protected Void doInBackground(Contacts ... contact) {
+            Random rand = new Random();
+            contact[0].uid = String_ext.bytesToHex(
+                    ((new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date())).toString()
+                    + (rand.nextFloat())
+                    ).getBytes());
+            dao.insertData(contact[0]);
             return null;
         }
     }
