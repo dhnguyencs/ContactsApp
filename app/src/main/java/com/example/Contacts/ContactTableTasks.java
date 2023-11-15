@@ -38,15 +38,6 @@ public class ContactTableTasks {
             return null;
         }
     }
-//    public static class InsertListTask extends AsyncTask<ArrayList<Contacts>, Void, ArrayList<Contacts>> {
-//        ContactsDAO dao;
-//        public InsertListTask(ContactsDAO dao) { this.dao = dao; }
-//
-//        @Override
-//        protected ArrayList<Contacts> doInBackground(ArrayList<Contacts>... arrayLists) {
-//            return null;
-//        }
-//    }
     public static class InsertTask extends AsyncTask<Contacts, Void, Void> {
         ContactsDAO dao;
         public InsertTask(ContactsDAO dao){

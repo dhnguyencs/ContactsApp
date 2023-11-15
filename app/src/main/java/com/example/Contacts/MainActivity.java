@@ -3,13 +3,9 @@ package com.example.Contacts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -18,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         });
         contact_list_recyclerView = (RecyclerView) findViewById(R.id.contact_list_main);
         contact_list_recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        viewContactsTableData();
+        inflateList();
     }
     private void seed(ArrayList<Contacts> contacts){
         Date newDate = new Date();
@@ -92,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             newInsertTask.execute(contact);
         }
     }
-    public void viewContactsTableData(){
+    public void inflateList(){
 
         lambda_two_param<Contacts, View, Void> customAdaptorCode = (Contacts contact, View itemView)->{
             TextView textView = (TextView) itemView.findViewById(R.id.ContactNameSingle);

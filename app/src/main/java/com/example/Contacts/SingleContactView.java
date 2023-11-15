@@ -22,10 +22,10 @@ public class SingleContactView extends AppCompatActivity {
             return contacts;
         }, (ArrayList<Contacts> contacts)->{
             Contacts contact = contacts.get(0);
-            ((TextView) findViewById(R.id.Name))    .setText(contact.firstName + " " + contact.lastName);
-            ((TextView) findViewById(R.id.Address)) .setText(contact.address);
-            ((TextView) findViewById(R.id.City))    .setText(contact.city);
-            ((TextView) findViewById(R.id.Age))     .setText(contact.getBirthDate() + "\n" + contact.getAge_str() + " years old");
+            ((TextView) findViewById(R.id.Name)).setText(contact.firstName + " " + contact.lastName);
+            ((TextView) findViewById(R.id.Address)).setText(contact.address);
+            ((TextView) findViewById(R.id.City)).setText(contact.city);
+            ((TextView) findViewById(R.id.Age)).setText(contact.getBirthDate() + "\n" + contact.getAge_str() + " years old");
             ((TextView) findViewById(R.id.PhoneNumber)).setText(contact.get_phone_formatted());
            return null;
         });
